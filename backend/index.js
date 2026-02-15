@@ -5,6 +5,7 @@ import { Pool } from 'pg'
 import { Server } from 'socket.io'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import http from 'http'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -12,7 +13,7 @@ const __dirname = path.dirname(__filename)
 dotenv.config()
 
 const app = express()
-const server = require('http').createServer(app)
+const server = http.createServer(app)
 const io = new Server(server, {
   cors: {
     origin: '*'
@@ -47,7 +48,6 @@ app.get('/api/devices', async (req, res) => {
     res.json(result.rows)
   } catch (error) {
     console.error('Error fetching devices:', error)
-    // Return mock data if DB not available
     res.json([
       { id: 1, name: 'Temperature Sensor 1', type: 'temperature', location: 'Floor 1', status: 'online' },
       { id: 2, name: 'Motion Detector 1', type: 'motion', location: 'Floor 2', status: 'online' }
