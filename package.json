@@ -2,18 +2,27 @@
   "name": "smart-building-app",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "install:backend": "cd backend && npm install",
     "install:frontend": "cd frontend && npm install",
     "build": "cd frontend && npm run build",
-    "start": "cd backend && npm start"
+    "start": "node backend/index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "pg": "^8.11.3",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "vite": "^5.0.8",
+    "@vitejs/plugin-react": "^4.2.1"
   },
   "build": {
     "builder": "NIXPACKS",
     "buildCommand": "npm run install:backend && npm run install:frontend && npm run build",
     "startCommand": "npm run start"
-  },
-  "deploy": {
-    "numReplicas": 1
   }
 }
