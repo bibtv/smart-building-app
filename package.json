@@ -3,15 +3,15 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "install:all": "cd backend && npm install && cd ../frontend && npm install",
-    "build": "cd frontend && npm install && npm run build",
-    "start": "cd backend && npm start",
-    "dev": "cd backend && npm run dev"
+    "install:backend": "cd backend && npm install",
+    "install:frontend": "cd frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm start"
   },
   "build": {
     "builder": "NIXPACKS",
-    "buildCommand": "cd backend && npm install && cd ../frontend && npm install && npm run build",
-    "startCommand": "cd backend && npm start"
+    "buildCommand": "npm run install:backend && npm run install:frontend && npm run build",
+    "startCommand": "npm run start"
   },
   "deploy": {
     "numReplicas": 1
