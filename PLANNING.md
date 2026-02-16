@@ -11,8 +11,9 @@
 1. **Smart Building Management** - Monitor and control building systems
 2. **IoT Device Integration** - Connect various sensors and actuators
 3. **ROS Robot Control** - Integrate and control ROS-based robots
-4. **Real-time Monitoring** - Live dashboards and alerts
-5. **Automation** - Node-RED flows for automated workflows
+4. **LoRaWAN Support** - Long-range, low-power sensor networks
+5. **Real-time Monitoring** - Live dashboards and alerts
+6. **Automation** - Node-RED flows for automated workflows
 
 ---
 
@@ -24,12 +25,18 @@ graph TB
         Sensors[Environment Sensors]
         Actuators[Actuators]
         Robots[ROS Robots]
+        LoRaWAN[LoRaWAN Devices]
     end
     
     subgraph "Communication"
         MQTT[MQTT Broker]
         WebSocket[WebSocket]
         REST[REST API]
+        LoRa[LoRaWAN Gateway]
+    end
+    
+    subgraph "Network Server"
+        ChirpStack[ChirpStack]
     end
     
     subgraph "Processing"
@@ -68,6 +75,7 @@ graph TB
 | Smart Building App | smart-building-app-production.up.railway.app | ✅ Running |
 | Node-RED | railway-nodered-production-1bec.up.railway.app | ✅ Running |
 | PostgreSQL | Railway | ✅ Running |
+| ChirpStack (LoRaWAN) | To be deployed | 🔄 Planning |
 
 ---
 
@@ -179,7 +187,8 @@ graph TB
 | Phase 1 | Core Platform | Done |
 | Phase 2 | IoT Expansion | Q1 2026 |
 | Phase 3 | ROS Integration | Q2 2026 |
-| Phase 4 | Advanced Features | Q3 2026 |
+| Phase 4 | LoRaWAN Integration | Q2-Q3 2026 |
+| Phase 5 | Advanced Features | Q4 2026 |
 
 ---
 
@@ -198,7 +207,15 @@ graph TB
 - [ ] Map visualization
 - [ ] Navigation controls
 
-### Phase 4: Advanced Features
+### Phase 4: LoRaWAN Integration
+- [ ] Setup LoRaWAN gateway
+- [ ] Deploy ChirpStack network server
+- [ ] Register LoRaWAN devices
+- [ ] MQTT integration with Node-RED
+- [ ] Payload decoding
+- [ ] Dashboard for LoRaWAN devices
+
+### Phase 5: Advanced Features
 - [ ] AI/ML analytics
 - [ ] Predictive maintenance
 - [ ] Energy optimization

@@ -1,0 +1,58 @@
+# Docker Compose for Smart Building IoT Platform
+
+## Quick Start
+
+```bash
+# Start all services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+```
+
+## Services
+
+| Service | Port | Description |
+|---------|------|-------------|
+| mosquitto | 1883, 9001 | MQTT Broker |
+| chirpstack-gateway-bridge | 1700 | LoRaWAN gateway bridge |
+| chirpstack-network-server | 8000 | Network server API |
+| chirpstack-application-server | 8080 | Application server API |
+| postgres | 5432 | PostgreSQL database |
+| redis | 6379 | Redis cache |
+
+## Access
+
+| Service | URL |
+|---------|-----|
+| ChirpStack UI | http://localhost:8080 |
+| Node-RED | http://localhost:1880 |
+| MQTT | localhost:1883 |
+
+## Default Credentials
+
+- **ChirpStack Admin:** admin / admin
+- **Node-RED:** admin / password
+- **PostgreSQL:** chirpstack / chirpstack
+
+## Environment Variables
+
+See `.env` file for configuration options.
+
+## Hardware Requirements
+
+- **Minimum:** 2GB RAM, 1 CPU
+- **Recommended:** 4GB RAM, 2 CPU
+
+---
+
+## Production Deployment
+
+For Railway deployment, use separate services:
+1. PostgreSQL - Use Railway's managed PostgreSQL
+2. Redis - Use Railway's managed Redis or Upstash
+3. ChirpStack - Deploy custom Docker image to Railway
+4. MQTT - Use HiveMQ Cloud or EMQX Cloud free tier
