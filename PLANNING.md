@@ -93,7 +93,15 @@ graph TB
 - [ ] Map visualization
 - [ ] Navigation controls
 
-### Phase 4: Advanced Features (Future)
+### Phase 4: LoRaWAN Integration (Planned)
+- [ ] Setup LoRaWAN gateway
+- [ ] Deploy ChirpStack network server
+- [ ] Register LoRaWAN devices
+- [ ] MQTT integration with Node-RED
+- [ ] Payload decoding
+- [ ] Dashboard for LoRaWAN devices
+
+### Phase 5: Advanced Features (Future)
 - [ ] AI/ML analytics
 - [ ] Predictive maintenance
 - [ ] Energy optimization
