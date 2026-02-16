@@ -1,0 +1,182 @@
+{
+  "info": {
+    "name": "Smart Building IoT Platform",
+    "description": "API collection for Smart Building IoT Platform",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://smart-building-app-production.up.railway.app",
+      "type": "string"
+    },
+    {
+      "key": "accessToken",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Devices",
+      "item": [
+        {
+          "name": "Get All Devices",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/devices"
+          }
+        },
+        {
+          "name": "Get Device by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/devices/:id"
+          }
+        },
+        {
+          "name": "Create Device",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/devices",
+            "body": {
+              "mode": "json",
+              "json": {
+                "name": "New Sensor",
+                "type": "temperature",
+                "location": "Living Room"
+              }
+            }
+          }
+        },
+        {
+          "name": "Update Device",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/devices/:id",
+            "body": {
+              "mode": "json",
+              "json": {
+                "name": "Updated Name",
+                "status": "online"
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Device",
+          "request": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/api/devices/:id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sensor Readings",
+      "item": [
+        {
+          "name": "Get All Readings",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/readings?deviceId=:deviceId&limit=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "readings"],
+              "query": [
+                {
+                  "key": "deviceId",
+                  "value": ":deviceId"
+                },
+                {
+                  "key": "limit",
+                  "value": "100"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Latest Reading",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/readings/latest"
+          }
+        },
+        {
+          "name": "Add Reading",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/readings",
+            "body": {
+              "mode": "json",
+              "json": {
+                "deviceId": "device-uuid-here",
+                "sensorType": "temperature",
+                "value": 22.5,
+                "unit": "celsius"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Alerts",
+      "item": [
+        {
+          "name": "Get All Alerts",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/alerts"
+          }
+        },
+        {
+          "name": "Acknowledge Alert",
+          "request": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/api/alerts/:id/acknowledge"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login (Auth0)",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/login"
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/auth/logout"
+          }
+        },
+        {
+          "name": "Get User Info",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/auth/me"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          }
+        }
+      ]
+    }
+  ]
+}
