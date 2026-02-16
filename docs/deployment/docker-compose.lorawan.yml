@@ -13,11 +13,6 @@ services:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U chirpstack"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   # Redis Cache
   redis:
@@ -27,11 +22,6 @@ services:
       - "6379:6379"
     volumes:
       - redis_data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
   # MQTT Broker
   mosquitto:
@@ -42,11 +32,6 @@ services:
       - "9001:9001"
     volumes:
       - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
-    healthcheck:
-      test: ["CMD", "mosquitto_sub", "-t", "$$SYS/#", "-C", "1", "-i", "healthcheck", "-W", "3"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
 
   # ChirpStack Gateway Bridge
   chirpstack-gateway-bridge:
@@ -57,8 +42,6 @@ services:
     environment:
       - MQTT_BROKER_HOST=mosquitto
       - MQTT_BROKER_PORT=1883
-    depends_on:
-      - mosquitto
 
   # ChirpStack Network Server
   chirpstack-network-server:
@@ -70,13 +53,6 @@ services:
       - REDIS_PORT=6379
       - MQTT_BROKER_HOST=mosquitto
       - MQTT_BROKER_PORT=1883
-      - GW_MQTT_TOPIC_TEMPLATE=application/{{application_id}}/device/{{dev_eui}}/{{direction}}
-      - DNS_HOST=8.8.8.8
-      - LOG_LEVEL=info
-    depends_on:
-      - postgres
-      - redis
-      - mosquitto
 
   # ChirpStack Application Server
   chirpstack-application-server:
@@ -90,15 +66,8 @@ services:
       - REDIS_PORT=6379
       - MQTT_BROKER_HOST=mosquitto
       - MQTT_BROKER_PORT=1883
-      - MQTT_BROKER_USERNAME=
-      - MQTT_BROKER_PASSWORD=
       - EXTERNAL_URL=http://localhost:8080
       - JWT_SECRET=${JWT_SECRET:-change-this-secret}
-      - LOG_LEVEL=info
-    depends_on:
-      - postgres
-      - redis
-      - mosquitto
 
 volumes:
   postgres_data:
